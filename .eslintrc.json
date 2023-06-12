@@ -23,6 +23,7 @@
     // 0 = off, 1 = warn , 2 = error
     "react/function-component-definition":[0, {"namedcomponents":["arrow-function","function-declaration"]}],
     "react/react-in-jsx-scope": 0,
-    "prettier/prettier" : ["error"]
+    "prettier/prettier" : ["error"],
+    "import/no-extraneous-dependencies": 0
   }
 }

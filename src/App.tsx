@@ -1,8 +1,15 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import SignIn from 'components/pages/signin';
+
 const App = () => {
   return (
-    <div className="App">
-      <h2>CRA, Typescript, yarn </h2>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<div>root</div>} />
+        <Route path="/signin" element={<SignIn />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
