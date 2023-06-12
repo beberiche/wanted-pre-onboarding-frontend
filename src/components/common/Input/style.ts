@@ -1,25 +1,5 @@
 import styled from 'styled-components';
 
-type StyledType = {
-  width?: string;
-  height?: string;
-};
-
-const StyledInput = styled.input<StyledType>`
-  /* display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  width: ${({ width }) => width};
-  height: ${({ height }) => height};
-  background-color: #fbfbfb;
-  border: 1px solid #d9d9d9;
-  outline-color: #d9d9d9;
-  padding: 10px; */
-`;
-// StyledInput.defaultProps = {
-//   width: '400px',
-//   height: '30px',
-// };
+const StyledInput = styled.input``;
 
 export default StyledInput;

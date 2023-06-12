@@ -1,17 +1,35 @@
+import { useRef, Dispatch, MutableRefObject } from 'react';
+import InputActionType from 'types/inputActionType';
+
 import StyledInput from './style';
 
-type PropType = {
-  dataTestId: string;
-  id: string;
+type Props = {
+  dataTestId?: string;
+  id?: string;
   type: string;
-  width?: string;
-  height?: string;
+  setValue?: Dispatch<InputActionType>;
 };
 
-const index = ({ dataTestId, type, id }: PropType) => {
+const index = ({ dataTestId, type, id, setValue }: Props) => {
+  const inputRef = useRef() as MutableRefObject<HTMLInputElement>;
+
+  let checkValid: ReturnType<typeof setTimeout> | undefined;
+  const inputValidHandler = () => {
+    if (!setValue) return;
+    window.clearTimeout(checkValid);
+    checkValid = setTimeout(() => {
+      setValue({ type: 'SET_VALUE', newValue: inputRef.current.value });
+    }, 300);
+  };
+
   return (
-    // <label for></label>
-    <StyledInput data-testid={dataTestId} type={type} id={id} />
+    <StyledInput
+      ref={inputRef}
+      data-testid={dataTestId}
+      type={type}
+      id={id}
+      onChange={inputValidHandler}
+    />
   );
 };
 
