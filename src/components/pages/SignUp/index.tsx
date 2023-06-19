@@ -4,7 +4,13 @@ import { useReducer } from 'react';
 import Input from 'components/common/Input';
 import Label from 'components/common/Label';
 import Button from 'components/common/Button';
+
+// reducer
 import emailReducer from 'utils/reducer/emailReducer';
+import passwordReducer from 'utils/reducer/passwordReducer';
+
+// type
+import InputStateType from 'types/inputStateType';
 
 const index = () => {
   const [email, dispatchEmail] = useReducer(emailReducer, {
@@ -12,12 +18,20 @@ const index = () => {
     valid: undefined,
   });
 
-  const emailCheckHandler = (): string => {
-    const { currValue, valid } = email;
+  const [password, dispatchPassword] = useReducer(passwordReducer, {
+    currValue: '',
+    valid: undefined,
+  });
+
+  const inputValidHandler = (input: InputStateType): string => {
+    const { currValue, valid } = input;
     if (valid === undefined || currValue === '') return 'default';
     if (valid === true) return 'success';
     return 'error';
   };
+
+  const emailCharacter = inputValidHandler(email);
+  const passwordCharacter = inputValidHandler(password);
 
   return (
     <>
@@ -28,22 +42,16 @@ const index = () => {
           type="text"
           id="email"
           setValue={dispatchEmail}
-          character={emailCheckHandler()}
+          character={emailCharacter}
         />
-        {/* {email.currValue !== '' && email.valid === true && (
-          <div>정상입니다.</div>
-        )}
-        {email.currValue !== '' && email.valid === false && (
-          <div>유효성 에러</div>
-        )} */}
       </Label>
       <Label name="PASSWORD" htmlFor="password">
         <Input
           dataTestId="password-input"
           type="password"
           id="password"
-          // setValue={setPassword}
-          // character={themeCheckHandler()}
+          setValue={dispatchPassword}
+          character={passwordCharacter}
         />
       </Label>
       <Button dataTestId="signup-button" name="회원가입" />
