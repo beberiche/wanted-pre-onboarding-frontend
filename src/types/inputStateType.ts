@@ -1,6 +1,6 @@
 type InputStateType = {
   currValue: string;
-  valid: boolean;
+  valid?: boolean;
 };
 
 export default InputStateType;

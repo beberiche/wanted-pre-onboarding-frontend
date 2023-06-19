@@ -7,17 +7,11 @@ const emailReducer = (
   action: InputActionType,
 ): InputStateType => {
   switch (action.type) {
-    case 'VALID': {
-      const newState = {
-        ...state,
-        valid: emailValidHandler(state.currValue),
-      };
-      return newState;
-    }
     case 'SET_VALUE': {
       const newState = {
         ...state,
         currValue: action.newValue,
+        valid: emailValidHandler(action.newValue),
       };
       return newState;
     }

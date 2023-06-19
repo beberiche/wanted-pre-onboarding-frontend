@@ -8,28 +8,43 @@ type Props = {
   id?: string;
   type: string;
   setValue?: Dispatch<InputActionType>;
+  character?: string;
+  children?: JSX.Element;
 };
 
-const index = ({ dataTestId, type, id, setValue }: Props) => {
+const index = ({
+  dataTestId,
+  type,
+  id,
+  setValue,
+  character,
+  children,
+}: Props) => {
   const inputRef = useRef() as MutableRefObject<HTMLInputElement>;
 
   let checkValid: ReturnType<typeof setTimeout> | undefined;
+
   const inputValidHandler = () => {
     if (!setValue) return;
-    window.clearTimeout(checkValid);
+    clearTimeout(checkValid);
+
     checkValid = setTimeout(() => {
       setValue({ type: 'SET_VALUE', newValue: inputRef.current.value });
     }, 300);
   };
 
   return (
-    <StyledInput
-      ref={inputRef}
-      data-testid={dataTestId}
-      type={type}
-      id={id}
-      onChange={inputValidHandler}
-    />
+    <>
+      <StyledInput
+        ref={inputRef}
+        data-testid={dataTestId}
+        type={type}
+        id={id}
+        onChange={inputValidHandler}
+        character={character}
+      />
+      {children}
+    </>
   );
 };
 

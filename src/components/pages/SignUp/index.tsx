@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from 'react';
+import { useReducer } from 'react';
 
 // common
 import Input from 'components/common/Input';
@@ -9,12 +9,15 @@ import emailReducer from 'utils/reducer/emailReducer';
 const index = () => {
   const [email, dispatchEmail] = useReducer(emailReducer, {
     currValue: '',
-    valid: false,
+    valid: undefined,
   });
 
-  useEffect(() => {
-    console.log(email.currValue);
-  }, [email.currValue]);
+  const emailCheckHandler = (): string => {
+    const { currValue, valid } = email;
+    if (valid === undefined || currValue === '') return 'default';
+    if (valid === true) return 'success';
+    return 'error';
+  };
 
   return (
     <>
@@ -25,7 +28,14 @@ const index = () => {
           type="text"
           id="email"
           setValue={dispatchEmail}
+          character={emailCheckHandler()}
         />
+        {/* {email.currValue !== '' && email.valid === true && (
+          <div>정상입니다.</div>
+        )}
+        {email.currValue !== '' && email.valid === false && (
+          <div>유효성 에러</div>
+        )} */}
       </Label>
       <Label name="PASSWORD" htmlFor="password">
         <Input
@@ -33,6 +43,7 @@ const index = () => {
           type="password"
           id="password"
           // setValue={setPassword}
+          // character={themeCheckHandler()}
         />
       </Label>
       <Button dataTestId="signup-button" name="회원가입" />
