@@ -9,17 +9,9 @@ type Props = {
   type: string;
   setValue?: Dispatch<InputActionType>;
   character?: string;
-  children?: JSX.Element;
 };
 
-const index = ({
-  dataTestId,
-  type,
-  id,
-  setValue,
-  character,
-  children,
-}: Props) => {
+const index = ({ dataTestId, type, id, setValue, character }: Props) => {
   const inputRef = useRef() as MutableRefObject<HTMLInputElement>;
 
   let checkValid: ReturnType<typeof setTimeout> | undefined;
@@ -34,17 +26,14 @@ const index = ({
   };
 
   return (
-    <>
-      <StyledInput
-        ref={inputRef}
-        data-testid={dataTestId}
-        type={type}
-        id={id}
-        onChange={inputValidHandler}
-        character={character}
-      />
-      {children}
-    </>
+    <StyledInput
+      ref={inputRef}
+      data-testid={dataTestId}
+      type={type}
+      id={id}
+      onChange={inputValidHandler}
+      character={character}
+    />
   );
 };
 

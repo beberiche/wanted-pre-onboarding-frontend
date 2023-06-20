@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useReducer, MouseEvent } from 'react';
 
 // common
 import Input from 'components/common/Input';
@@ -33,28 +33,42 @@ const index = () => {
   const emailCharacter = inputValidHandler(email);
   const passwordCharacter = inputValidHandler(password);
 
+  const buttonTest = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    console.log('됨');
+  };
+
   return (
     <>
       <h2>회원가입</h2>
-      <Label name="EMAIL" htmlFor="email">
-        <Input
-          dataTestId="email-input"
-          type="text"
-          id="email"
-          setValue={dispatchEmail}
-          character={emailCharacter}
+      <form action="">
+        <Label name="EMAIL" htmlFor="email">
+          <Input
+            dataTestId="email-input"
+            type="text"
+            id="email"
+            setValue={dispatchEmail}
+            character={emailCharacter}
+          />
+        </Label>
+        <Label name="PASSWORD" htmlFor="password">
+          <Input
+            dataTestId="password-input"
+            type="password"
+            id="password"
+            setValue={dispatchPassword}
+            character={passwordCharacter}
+          />
+        </Label>
+        <Button
+          dataTestId="signup-button"
+          name="회원가입"
+          onClick={buttonTest}
+          disabled={
+            emailCharacter !== 'success' || passwordCharacter !== 'success'
+          }
         />
-      </Label>
-      <Label name="PASSWORD" htmlFor="password">
-        <Input
-          dataTestId="password-input"
-          type="password"
-          id="password"
-          setValue={dispatchPassword}
-          character={passwordCharacter}
-        />
-      </Label>
-      <Button dataTestId="signup-button" name="회원가입" />
+      </form>
     </>
   );
 };

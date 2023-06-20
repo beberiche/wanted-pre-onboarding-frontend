@@ -17,6 +17,8 @@ const changeColor = (character?: string): string => {
 const StyledInput = styled.input<Style>`
   color: ${({ character }) => changeColor(character)};
   border-color: ${({ character }) => changeColor(character)};
+  outline: none;
+  transition: all 0.2s ease;
 `;
 
 export default StyledInput;

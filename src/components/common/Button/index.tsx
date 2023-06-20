@@ -5,11 +5,15 @@ type Props = {
   name: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   dataTestId?: string;
+  disabled?: boolean | undefined;
 };
 
-const index = ({ name, onClick, dataTestId }: Props) => {
+const index = ({ name, onClick, dataTestId, disabled }: Props) => {
   return (
-    <StyledButton data-testid={dataTestId} onClick={onClick}>
+    <StyledButton
+      data-testid={dataTestId}
+      onClick={onClick}
+      disabled={disabled}>
       {name}
     </StyledButton>
   );
