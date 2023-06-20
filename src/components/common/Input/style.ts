@@ -5,7 +5,9 @@ type Style = {
   character?: string;
 };
 
-const StyledInput = styled.input<Style>`
+const StyledInput = styled.input.attrs({
+  autoComplete: 'off',
+})<Style>`
   color: ${({ character }) => changeColor(character)};
   border-color: ${({ character }) => changeColor(character)};
   outline: none;
