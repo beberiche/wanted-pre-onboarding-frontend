@@ -1,4 +1,5 @@
-import { useReducer, MouseEvent } from 'react';
+import { useReducer, MouseEvent, useRef, MutableRefObject } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // common
 import Input from 'components/common/Input';
@@ -13,7 +14,16 @@ import { passwordReducer } from 'utils/reducer/passwordReducer';
 // type
 import { InputStateType } from 'types/inputStateType';
 
+// api
+import { signUp } from 'api/auth';
+import { isAxiosError } from 'axios';
+
 const index = () => {
+  const navigate = useNavigate();
+
+  const emailRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const passwordRef = useRef() as MutableRefObject<HTMLInputElement>;
+
   const [email, dispatchEmail] = useReducer(emailReducer, {
     currValue: '',
     valid: undefined,
@@ -34,9 +44,30 @@ const index = () => {
   const emailCharacter = inputValidHandler(email);
   const passwordCharacter = inputValidHandler(password);
 
-  const buttonTest = (e: MouseEvent<HTMLButtonElement>) => {
+  const signupHandler = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log('됨');
+    if (email.currValue && password.currValue) {
+      try {
+        await signUp({
+          email: email.currValue,
+          password: password.currValue,
+        });
+        alert('성공적으로 가입이 완료되었습니다.');
+        navigate('/signin');
+      } catch (error) {
+        let message = '회원가입에 실패했습니다.';
+        if (isAxiosError(error) && error.response?.status === 400)
+          message = error.response?.data?.message;
+
+        alert(message);
+
+        // 초기화
+        emailRef.current.value = '';
+        passwordRef.current.value = '';
+        dispatchEmail({ type: 'INIT', newValue: emailRef.current.value });
+        dispatchPassword({ type: 'INIT', newValue: passwordRef.current.value });
+      }
+    }
   };
 
   return (
@@ -45,6 +76,7 @@ const index = () => {
       <form action="">
         <Label name="EMAIL" htmlFor="email" character={emailCharacter} />
         <Input
+          inputRef={emailRef}
           dataTestId="email-input"
           type="text"
           id="email"
@@ -65,6 +97,7 @@ const index = () => {
           character={passwordCharacter}
         />
         <Input
+          inputRef={passwordRef}
           dataTestId="password-input"
           type="password"
           id="password"
@@ -74,7 +107,7 @@ const index = () => {
         <Button
           dataTestId="signup-button"
           name="회원가입"
-          onClick={buttonTest}
+          onClick={signupHandler}
           disabled={
             emailCharacter !== 'success' || passwordCharacter !== 'success'
           }

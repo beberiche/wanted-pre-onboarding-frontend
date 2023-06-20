@@ -1,9 +1,10 @@
-import { useRef, Dispatch, MutableRefObject } from 'react';
+import { Dispatch, MutableRefObject } from 'react';
 import { InputActionType } from 'types/inputActionType';
 
 import StyledInput from './style';
 
 type Props = {
+  inputRef?: MutableRefObject<HTMLInputElement>;
   dataTestId?: string;
   id?: string;
   type: string;
@@ -11,13 +12,18 @@ type Props = {
   character?: string;
 };
 
-const index = ({ dataTestId, type, id, setValue, character }: Props) => {
-  const inputRef = useRef() as MutableRefObject<HTMLInputElement>;
-
+const index = ({
+  inputRef,
+  dataTestId,
+  type,
+  id,
+  setValue,
+  character,
+}: Props) => {
   let checkValid: ReturnType<typeof setTimeout> | undefined;
 
   const inputValidHandler = () => {
-    if (!setValue) return;
+    if (!setValue || !inputRef) return;
     clearTimeout(checkValid);
 
     checkValid = setTimeout(() => {
