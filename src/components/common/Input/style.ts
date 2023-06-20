@@ -10,6 +10,9 @@ const StyledInput = styled.input.attrs({
 })<Style>`
   color: ${({ character }) => changeColor(character)};
   border-color: ${({ character }) => changeColor(character)};
+  min-width: 15rem;
+  font-size: 1.2rem;
+  padding: 0.5rem;
   outline: none;
   transition: all 0.2s ease;
 `;
