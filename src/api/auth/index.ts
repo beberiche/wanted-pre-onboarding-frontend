@@ -2,22 +2,25 @@ import { customAxios } from 'api';
 
 const authAxios = customAxios('auth');
 
-type User = {
+type UserInfo = {
   email: string;
   password: string;
 };
 
-type ResponseCommonType<T> = {
-  status: number;
-  body: T;
-};
-
-export const signUp = async ({ email, password }: User) => {
-  const response = await authAxios.post<ResponseCommonType<null>>('/signup', {
+export const signup = async ({ email, password }: UserInfo) => {
+  const response = await authAxios.post('/signup', {
     email,
     password,
   });
 
-  console.log(response);
   return response;
+};
+
+export const signin = async ({ email, password }: UserInfo) => {
+  const response = await authAxios.post('/signin', {
+    email,
+    password,
+  });
+
+  return response.data;
 };
