@@ -1,17 +1,8 @@
 import styled from 'styled-components';
+import { changeColor } from 'utils/fn/changeColor';
 
 type Style = {
   character?: string;
-};
-
-const changeColor = (character?: string): string => {
-  if (character === 'default' || character === undefined) {
-    return 'black';
-  }
-  if (character === 'success') {
-    return 'green';
-  }
-  return 'red';
 };
 
 const StyledInput = styled.input<Style>`

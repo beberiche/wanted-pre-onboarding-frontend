@@ -5,10 +5,11 @@ type Props = {
   name: string;
   htmlFor: string;
   children: ReactNode;
+  character?: string;
 };
-const index = ({ name, htmlFor, children }: Props) => {
+const index = ({ name, htmlFor, children, character }: Props) => {
   return (
-    <StyledLabel htmlFor={htmlFor}>
+    <StyledLabel htmlFor={htmlFor} character={character}>
       {name} {children}
     </StyledLabel>
   );

@@ -1,9 +1,9 @@
 import InputActionType from 'types/inputActionType';
 import InputStateType from 'types/inputStateType';
 
-import emailValidHandler from 'utils/valid/emailValidHandler';
+import { emailValidHandler } from 'utils/valid/emailValidHandler';
 
-const emailReducer = (
+export const emailReducer = (
   state: InputStateType,
   action: InputActionType,
 ): InputStateType => {
@@ -20,5 +20,3 @@ const emailReducer = (
       return state;
   }
 };
-
-export default emailReducer;

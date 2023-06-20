@@ -6,8 +6,8 @@ import Label from 'components/common/Label';
 import Button from 'components/common/Button';
 
 // reducer
-import emailReducer from 'utils/reducer/emailReducer';
-import passwordReducer from 'utils/reducer/passwordReducer';
+import { emailReducer } from 'utils/reducer/emailReducer';
+import { passwordReducer } from 'utils/reducer/passwordReducer';
 
 // type
 import InputStateType from 'types/inputStateType';
@@ -42,7 +42,7 @@ const index = () => {
     <>
       <h2>회원가입</h2>
       <form action="">
-        <Label name="EMAIL" htmlFor="email">
+        <Label name="EMAIL" htmlFor="email" character={emailCharacter}>
           <Input
             dataTestId="email-input"
             type="text"
@@ -51,7 +51,7 @@ const index = () => {
             character={emailCharacter}
           />
         </Label>
-        <Label name="PASSWORD" htmlFor="password">
+        <Label name="PASSWORD" htmlFor="password" character={passwordCharacter}>
           <Input
             dataTestId="password-input"
             type="password"

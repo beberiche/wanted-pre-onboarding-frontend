@@ -1,9 +1,9 @@
 import InputActionType from 'types/inputActionType';
 import InputStateType from 'types/inputStateType';
 
-import passwordValidHandler from 'utils/valid/passwordValidHandler';
+import { passwordValidHandler } from 'utils/valid/passwordValidHandler';
 
-const passwordReducer = (
+export const passwordReducer = (
   state: InputStateType,
   action: InputActionType,
 ): InputStateType => {
@@ -20,5 +20,3 @@ const passwordReducer = (
       return state;
   }
 };
-
-export default passwordReducer;
