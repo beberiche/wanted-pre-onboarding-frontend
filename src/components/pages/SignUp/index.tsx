@@ -104,6 +104,14 @@ const index = () => {
           setValue={dispatchPassword}
           character={passwordCharacter}
         />
+        <Message
+          message={
+            passwordCharacter === 'error'
+              ? '비밀번호는 8자 이상이어야 합니다.'
+              : '사용가능한 비밀번호 입니다.'
+          }
+          character={passwordCharacter}
+        />
         <Button
           dataTestId="signup-button"
           name="회원가입"
