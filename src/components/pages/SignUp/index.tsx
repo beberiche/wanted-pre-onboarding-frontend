@@ -1,4 +1,10 @@
-import { useReducer, MouseEvent, useRef, MutableRefObject } from 'react';
+import {
+  useReducer,
+  MouseEvent,
+  useRef,
+  MutableRefObject,
+  useEffect,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // common
@@ -15,11 +21,18 @@ import { passwordReducer } from 'utils/reducer/passwordReducer';
 import { InputStateType } from 'types/inputStateType';
 
 // api
-import { signUp } from 'api/auth';
+import { signup } from 'api/auth';
 import { isAxiosError } from 'axios';
 
 const index = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem('authorization')) {
+      alert('로그인이 확인되었습니다. todo 페이지로 이동합니다.');
+      navigate('/todo');
+    }
+  }, []);
 
   const emailRef = useRef() as MutableRefObject<HTMLInputElement>;
   const passwordRef = useRef() as MutableRefObject<HTMLInputElement>;
@@ -48,7 +61,7 @@ const index = () => {
     e.preventDefault();
     if (email.currValue && password.currValue) {
       try {
-        await signUp({
+        await signup({
           email: email.currValue,
           password: password.currValue,
         });
@@ -56,6 +69,7 @@ const index = () => {
         navigate('/signin');
       } catch (error) {
         let message = '회원가입에 실패했습니다.';
+
         if (isAxiosError(error) && error.response?.status === 400)
           message = error.response?.data?.message;
 
