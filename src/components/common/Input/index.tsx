@@ -1,5 +1,5 @@
 import { useRef, Dispatch, MutableRefObject } from 'react';
-import InputActionType from 'types/inputActionType';
+import { InputActionType } from 'types/inputActionType';
 
 import StyledInput from './style';
 

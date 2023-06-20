@@ -1,4 +1,4 @@
-type InputStateType = {
+export type InputStateType = {
   currValue: string;
   valid?: boolean;
 };

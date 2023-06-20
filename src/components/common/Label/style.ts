@@ -10,7 +10,6 @@ const StyledLabel = styled.label<Style>`
   color: ${({ character }) => changeColor(character)};
   border-color: ${({ character }) => changeColor(character)};
   display: block;
-  margin: 1rem 0;
   transition: all 0.2s ease;
   font-weight: 600;
 `;

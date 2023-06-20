@@ -4,13 +4,14 @@ import { useReducer, MouseEvent } from 'react';
 import Input from 'components/common/Input';
 import Label from 'components/common/Label';
 import Button from 'components/common/Button';
+import Message from 'components/common/Message';
 
 // reducer
 import { emailReducer } from 'utils/reducer/emailReducer';
 import { passwordReducer } from 'utils/reducer/passwordReducer';
 
 // type
-import InputStateType from 'types/inputStateType';
+import { InputStateType } from 'types/inputStateType';
 
 const index = () => {
   const [email, dispatchEmail] = useReducer(emailReducer, {
@@ -42,24 +43,34 @@ const index = () => {
     <>
       <h2>회원가입</h2>
       <form action="">
-        <Label name="EMAIL" htmlFor="email" character={emailCharacter}>
-          <Input
-            dataTestId="email-input"
-            type="text"
-            id="email"
-            setValue={dispatchEmail}
-            character={emailCharacter}
-          />
-        </Label>
-        <Label name="PASSWORD" htmlFor="password" character={passwordCharacter}>
-          <Input
-            dataTestId="password-input"
-            type="password"
-            id="password"
-            setValue={dispatchPassword}
-            character={passwordCharacter}
-          />
-        </Label>
+        <Label name="EMAIL" htmlFor="email" character={emailCharacter} />
+        <Input
+          dataTestId="email-input"
+          type="text"
+          id="email"
+          setValue={dispatchEmail}
+          character={emailCharacter}
+        />
+        <Message
+          message={
+            emailCharacter === 'error'
+              ? '올바른 이메일 형식을 작성해주세요.'
+              : '사용가능한 이메일 입니다.'
+          }
+          character={emailCharacter}
+        />
+        <Label
+          name="PASSWORD"
+          htmlFor="password"
+          character={passwordCharacter}
+        />
+        <Input
+          dataTestId="password-input"
+          type="password"
+          id="password"
+          setValue={dispatchPassword}
+          character={passwordCharacter}
+        />
         <Button
           dataTestId="signup-button"
           name="회원가입"

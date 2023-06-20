@@ -1,5 +1,5 @@
-import InputActionType from 'types/inputActionType';
-import InputStateType from 'types/inputStateType';
+import { InputActionType } from 'types/inputActionType';
+import { InputStateType } from 'types/inputStateType';
 
 import { emailValidHandler } from 'utils/valid/emailValidHandler';
 

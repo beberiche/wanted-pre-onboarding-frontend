@@ -1,16 +1,14 @@
-import { ReactNode } from 'react';
 import StyledLabel from './style';
 
 type Props = {
   name: string;
   htmlFor: string;
-  children: ReactNode;
   character?: string;
 };
-const index = ({ name, htmlFor, children, character }: Props) => {
+const index = ({ name, htmlFor, character }: Props) => {
   return (
     <StyledLabel htmlFor={htmlFor} character={character}>
-      {name} {children}
+      {name}
     </StyledLabel>
   );
 };

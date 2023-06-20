@@ -1,5 +1,5 @@
-import InputActionType from 'types/inputActionType';
-import InputStateType from 'types/inputStateType';
+import { InputActionType } from 'types/inputActionType';
+import { InputStateType } from 'types/inputStateType';
 
 import { passwordValidHandler } from 'utils/valid/passwordValidHandler';
 

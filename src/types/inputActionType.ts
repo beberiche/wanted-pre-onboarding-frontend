@@ -1,6 +1,4 @@
-type InputActionType = {
+export type InputActionType = {
   type: string;
   newValue: string;
 };
-
-export default InputActionType;
