@@ -16,6 +16,14 @@ export const passwordReducer = (
       };
       return newState;
     }
+    case 'INIT': {
+      const newState = {
+        ...state,
+        currValue: action.newValue,
+        valid: undefined,
+      };
+      return newState;
+    }
     default:
       return state;
   }
