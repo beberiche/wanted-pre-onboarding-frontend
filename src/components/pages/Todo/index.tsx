@@ -11,6 +11,22 @@ const index = () => {
     }
   }, []);
 
-  return <div>todo</div>;
+  return (
+    <>
+      <h2>todo</h2>
+      {/* <li>
+        <label>
+          <input type="checkbox" />
+          <span>TODO 1</span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" />
+          <span>TODO 2</span>
+        </label>
+      </li> */}
+    </>
+  );
 };
 export default index;

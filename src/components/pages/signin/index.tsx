@@ -95,44 +95,47 @@ const index = () => {
     <>
       <h2>로그인</h2>
       <form action="">
-        <Label name="EMAIL" htmlFor="email" character={emailCharacter} />
-        <Input
-          inputRef={emailRef}
-          dataTestId="email-input"
-          type="text"
-          id="email"
-          setValue={dispatchEmail}
-          character={emailCharacter}
-        />
-        <Message
-          message={
-            emailCharacter === 'error'
-              ? '올바른 이메일 형식을 작성해주세요.'
-              : ''
-          }
-          character={emailCharacter}
-        />
-        <Label
-          name="PASSWORD"
-          htmlFor="password"
-          character={passwordCharacter}
-        />
-        <Input
-          inputRef={passwordRef}
-          dataTestId="password-input"
-          type="password"
-          id="password"
-          setValue={dispatchPassword}
-          character={passwordCharacter}
-        />
-        <Message
-          message={
-            passwordCharacter === 'error'
-              ? '비밀번호는 8자 이상이어야 합니다.'
-              : ''
-          }
-          character={passwordCharacter}
-        />
+        <Label name="EMAIL" htmlFor="email" character={emailCharacter}>
+          <>
+            <Input
+              inputRef={emailRef}
+              dataTestId="email-input"
+              type="text"
+              id="email"
+              setValue={dispatchEmail}
+              character={emailCharacter}
+            />
+            <Message
+              message={
+                emailCharacter === 'error'
+                  ? '올바른 이메일 형식을 작성해주세요.'
+                  : ''
+              }
+              character={emailCharacter}
+            />
+          </>
+        </Label>
+
+        <Label name="PASSWORD" htmlFor="password" character={passwordCharacter}>
+          <>
+            <Input
+              inputRef={passwordRef}
+              dataTestId="password-input"
+              type="password"
+              id="password"
+              setValue={dispatchPassword}
+              character={passwordCharacter}
+            />
+            <Message
+              message={
+                passwordCharacter === 'error'
+                  ? '비밀번호는 8자 이상이어야 합니다.'
+                  : ''
+              }
+              character={passwordCharacter}
+            />
+          </>
+        </Label>
         <Button name="회원가입으로 이동" onClick={moveToSignupHandler} />
         <Button
           dataTestId="signin-button"
