@@ -1,4 +1,4 @@
 export const passwordValidHandler = (password: string): boolean => {
-  if (password.length > 8) return true;
+  if (password.length >= 8) return true;
   return false;
 };
