@@ -9,7 +9,7 @@ type Style = {
 const StyledLabel = styled.label<Style>`
   color: ${({ character }) => changeColor(character)};
   border-color: ${({ character }) => changeColor(character)};
-  display: block;
+  display: inline-block;
   transition: all 0.2s ease;
   font-weight: 600;
 `;

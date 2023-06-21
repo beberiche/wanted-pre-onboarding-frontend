@@ -15,3 +15,15 @@ export const getTodos = async () => {
 
   return response;
 };
+
+type Update = {
+  id: number;
+  todo: string;
+  isCompleted: boolean;
+};
+
+export const updateTodo = async ({ id, todo, isCompleted }: Update) => {
+  const response = await todosAxios.put(`/${id}`, { todo, isCompleted });
+
+  return response;
+};

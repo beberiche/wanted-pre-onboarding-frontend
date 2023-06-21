@@ -1,7 +1,7 @@
 import StyledLabel from './style';
 
 type Props = {
-  name: string;
+  name?: string;
   htmlFor: string;
   character?: string;
   children?: JSX.Element;
