@@ -80,6 +80,7 @@ const index = () => {
       alert('로그인에 성공했습니다.');
       navigate('/todo');
     } catch (error) {
+      console.log(error);
       const message = '로그인에 실패했습니다.';
       alert(message);
 

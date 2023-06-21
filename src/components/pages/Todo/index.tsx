@@ -143,8 +143,9 @@ const index = () => {
     if (!localStorage.getItem('Authorization')) {
       alert('로그인 이후 사용하실 수 있습니다.');
       navigate('/signin');
+    } else {
+      getTodosHandler();
     }
-    (async () => getTodosHandler())();
   }, []);
 
   const createTodoHandler = async (e: MouseEvent<HTMLButtonElement>) => {
