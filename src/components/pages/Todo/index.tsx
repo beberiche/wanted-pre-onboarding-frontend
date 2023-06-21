@@ -23,11 +23,25 @@ type Props = {
   id: number;
   todo: string;
   isCompleted: boolean;
-  isEdit: boolean;
+  initEdit: boolean;
   onUpdate: () => void;
 };
 
-const TodoLi = ({ id, todo, isCompleted, isEdit, onUpdate }: Props) => {
+const TodoLi = ({ id, todo, isCompleted, initEdit, onUpdate }: Props) => {
+  const inputRef = useRef({
+    value: todo,
+  }) as MutableRefObject<HTMLInputElement>;
+
+  const [isEdit, setIsEdit] = useState(initEdit);
+  const [value, setValue] = useState('');
+
+  useEffect(() => {
+    setValue(inputRef.current.value);
+  }, []);
+
+  const toggleIsEditHandler = () => {
+    setIsEdit(!isEdit);
+  };
   const checkBoxChangeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
     try {
       const body = {
@@ -39,10 +53,30 @@ const TodoLi = ({ id, todo, isCompleted, isEdit, onUpdate }: Props) => {
       await updateTodo(body);
       onUpdate();
     } catch (error) {
-      console.log(error);
       const message = '체크박스를 수정하는데 실패했습니다.';
       alert(message);
     }
+  };
+
+  const submitUpdateClickHandler = async () => {
+    try {
+      const body = {
+        id,
+        todo: value,
+        isCompleted,
+      };
+
+      await updateTodo(body);
+      onUpdate();
+      toggleIsEditHandler();
+    } catch (error) {
+      const message = 'todo를 변경하는데 실패했습니다.';
+      alert(message);
+    }
+  };
+
+  const inputValueChangeHandler = () => {
+    setValue(inputRef.current.value);
   };
 
   return (
@@ -56,7 +90,13 @@ const TodoLi = ({ id, todo, isCompleted, isEdit, onUpdate }: Props) => {
             onChange={checkBoxChangeHandler}
           />
           {isEdit ? (
-            <Input type="text" initValue={todo} dataTestId="modify-input" />
+            <input
+              ref={inputRef}
+              value={value}
+              onChange={inputValueChangeHandler}
+              type="text"
+              data-testid="modify-input"
+            />
           ) : (
             <span style={{ display: 'inline-block', width: '7rem' }}>
               {todo}
@@ -67,9 +107,11 @@ const TodoLi = ({ id, todo, isCompleted, isEdit, onUpdate }: Props) => {
       <Button
         name={isEdit ? '제출' : '수정'}
         dataTestId={isEdit ? 'submit-button' : 'modify-button'}
+        onClick={isEdit ? submitUpdateClickHandler : toggleIsEditHandler}
       />
       <Button
         name={isEdit ? '취소' : '삭제'}
+        onClick={toggleIsEditHandler}
         dataTestId={isEdit ? 'cancel-button' : 'delete-button'}
       />
     </li>
@@ -123,7 +165,7 @@ const index = () => {
             id={id}
             todo={todo}
             isCompleted={isCompleted}
-            isEdit={false}
+            initEdit={false}
             onUpdate={getTodosHandler}
           />
         ))}
