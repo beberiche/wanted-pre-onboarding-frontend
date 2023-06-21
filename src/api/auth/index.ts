@@ -22,5 +22,5 @@ export const signin = async ({ email, password }: UserInfo) => {
     password,
   });
 
-  return response.data;
+  return response;
 };
