@@ -27,3 +27,9 @@ export const updateTodo = async ({ id, todo, isCompleted }: Update) => {
 
   return response;
 };
+
+export const deleteTodo = async (id: number) => {
+  const response = await todosAxios.delete(`/${id}`);
+
+  return response;
+};

@@ -17,7 +17,7 @@ import Label from 'components/common/Label';
 
 // api
 
-import { createTodo, getTodos, updateTodo } from 'api/todo';
+import { createTodo, deleteTodo, getTodos, updateTodo } from 'api/todo';
 
 type Props = {
   id: number;
@@ -75,6 +75,16 @@ const TodoLi = ({ id, todo, isCompleted, initEdit, onUpdate }: Props) => {
     }
   };
 
+  const deleteTodoHandler = async () => {
+    try {
+      await deleteTodo(id);
+      onUpdate();
+    } catch (error) {
+      const message = 'todo를 삭제하는데 실패했습니다.';
+      alert(message);
+    }
+  };
+
   const inputValueChangeHandler = () => {
     setValue(inputRef.current.value);
   };
@@ -111,7 +121,7 @@ const TodoLi = ({ id, todo, isCompleted, initEdit, onUpdate }: Props) => {
       />
       <Button
         name={isEdit ? '취소' : '삭제'}
-        onClick={toggleIsEditHandler}
+        onClick={isEdit ? toggleIsEditHandler : deleteTodoHandler}
         dataTestId={isEdit ? 'cancel-button' : 'delete-button'}
       />
     </li>
