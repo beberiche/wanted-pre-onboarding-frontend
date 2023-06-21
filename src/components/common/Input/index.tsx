@@ -11,6 +11,7 @@ type Props = {
   setValue?: Dispatch<InputActionType>;
   character?: string;
   checked?: boolean;
+  initValue?: string;
 };
 
 const index = ({
@@ -21,9 +22,13 @@ const index = ({
   setValue,
   character,
   checked,
+  initValue,
 }: Props) => {
   let checkValid: ReturnType<typeof setTimeout> | undefined;
-  const ref = useRef() as MutableRefObject<HTMLInputElement>;
+  const ref = useRef({
+    value: initValue || '',
+  }) as MutableRefObject<HTMLInputElement>;
+
   const inputValidHandler = () => {
     if (!setValue || !inputRef) return;
     clearTimeout(checkValid);
