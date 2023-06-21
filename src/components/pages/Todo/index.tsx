@@ -16,7 +16,6 @@ import Button from 'components/common/Button';
 import Label from 'components/common/Label';
 
 // api
-
 import { createTodo, deleteTodo, getTodos, updateTodo } from 'api/todo';
 
 type Props = {
@@ -166,8 +165,12 @@ const index = () => {
     <>
       <h2>todo</h2>
       <form>
-        <Input type="text" inputRef={inputRef} />
-        <Button name="생성" onClick={createTodoHandler} />
+        <Input type="text" inputRef={inputRef} dataTestId="new-todo-input" />
+        <Button
+          name="생성"
+          onClick={createTodoHandler}
+          dataTestId="new-todo-add-button"
+        />
       </form>
       <ul>
         {todoList.map(({ id, todo, isCompleted }) => (
