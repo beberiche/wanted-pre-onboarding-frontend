@@ -10,6 +10,8 @@ type Props = {
   type: string;
   setValue?: Dispatch<InputActionType>;
   character?: string;
+  checked?: boolean;
+  initValue?: string;
 };
 
 const index = ({
@@ -19,6 +21,7 @@ const index = ({
   id,
   setValue,
   character,
+  checked,
 }: Props) => {
   let checkValid: ReturnType<typeof setTimeout> | undefined;
 
@@ -27,7 +30,10 @@ const index = ({
     clearTimeout(checkValid);
 
     checkValid = setTimeout(() => {
-      setValue({ type: 'SET_VALUE', newValue: inputRef.current.value });
+      setValue({
+        type: 'SET_VALUE',
+        newValue: inputRef.current.value,
+      });
     }, 300);
   };
 
@@ -39,6 +45,7 @@ const index = ({
       id={id}
       onChange={inputValidHandler}
       character={character}
+      checked={type === 'checkbox' && checked}
     />
   );
 };

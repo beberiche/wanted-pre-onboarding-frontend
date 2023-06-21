@@ -1,4 +1,4 @@
-import { customAxios } from 'api';
+import { customAxios, customAxiosArr } from 'api';
 
 const authAxios = customAxios('auth');
 
@@ -22,5 +22,8 @@ export const signin = async ({ email, password }: UserInfo) => {
     password,
   });
 
-  return response.data;
+  customAxiosArr.forEach((axios) => {
+    axios.defaults.headers.common.Authorization = `Bearer ${response.data.access_token}`;
+  });
+  return response;
 };

@@ -2,7 +2,9 @@ import axios, { AxiosInstance } from 'axios';
 
 const BASE_URL = 'https://www.pre-onboarding-selection-task.shop/';
 
-export const customAxios = (url?: string): AxiosInstance => {
+export const customAxiosArr: AxiosInstance[] = [];
+
+export const customAxios = (url: string): AxiosInstance => {
   const axiosApi = axios.create({
     baseURL: BASE_URL + (url || ''),
     headers: {
@@ -16,5 +18,16 @@ export const customAxios = (url?: string): AxiosInstance => {
     )}`;
   }
 
+  customAxiosArr.push(axiosApi);
   return axiosApi;
 };
+
+// export const setAuthorization = () => {
+//   if (localStorage.getItem('Authorization')) {
+//     customAxiosArr.forEach((axiosInstance) => {
+//       axiosInstance.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem(
+//         'Authorization',
+//       )}`;
+//     });
+//   }
+// };

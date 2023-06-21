@@ -3,6 +3,8 @@ import { changeColor } from 'utils/fn/changeColor';
 
 type Style = {
   character?: string;
+  type: string;
+  checked?: boolean;
 };
 
 const StyledInput = styled.input.attrs({

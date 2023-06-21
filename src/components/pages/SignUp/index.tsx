@@ -28,7 +28,7 @@ const index = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem('authorization')) {
+    if (localStorage.getItem('Authorization')) {
       alert('로그인이 확인되었습니다. todo 페이지로 이동합니다.');
       navigate('/todo');
     }
@@ -88,44 +88,46 @@ const index = () => {
     <>
       <h2>회원가입</h2>
       <form action="">
-        <Label name="EMAIL" htmlFor="email" character={emailCharacter} />
-        <Input
-          inputRef={emailRef}
-          dataTestId="email-input"
-          type="text"
-          id="email"
-          setValue={dispatchEmail}
-          character={emailCharacter}
-        />
-        <Message
-          message={
-            emailCharacter === 'error'
-              ? '올바른 이메일 형식을 작성해주세요.'
-              : '사용가능한 이메일 입니다.'
-          }
-          character={emailCharacter}
-        />
-        <Label
-          name="PASSWORD"
-          htmlFor="password"
-          character={passwordCharacter}
-        />
-        <Input
-          inputRef={passwordRef}
-          dataTestId="password-input"
-          type="password"
-          id="password"
-          setValue={dispatchPassword}
-          character={passwordCharacter}
-        />
-        <Message
-          message={
-            passwordCharacter === 'error'
-              ? '비밀번호는 8자 이상이어야 합니다.'
-              : '사용가능한 비밀번호 입니다.'
-          }
-          character={passwordCharacter}
-        />
+        <Label name="EMAIL" htmlFor="email" character={emailCharacter}>
+          <>
+            <Input
+              inputRef={emailRef}
+              dataTestId="email-input"
+              type="text"
+              id="email"
+              setValue={dispatchEmail}
+              character={emailCharacter}
+            />
+            <Message
+              message={
+                emailCharacter === 'error'
+                  ? '올바른 이메일 형식을 작성해주세요.'
+                  : '사용가능한 이메일 입니다.'
+              }
+              character={emailCharacter}
+            />
+          </>
+        </Label>
+        <Label name="PASSWORD" htmlFor="password" character={passwordCharacter}>
+          <>
+            <Input
+              inputRef={passwordRef}
+              dataTestId="password-input"
+              type="password"
+              id="password"
+              setValue={dispatchPassword}
+              character={passwordCharacter}
+            />
+            <Message
+              message={
+                passwordCharacter === 'error'
+                  ? '비밀번호는 8자 이상이어야 합니다.'
+                  : '사용가능한 비밀번호 입니다.'
+              }
+              character={passwordCharacter}
+            />
+          </>
+        </Label>
         <Button
           dataTestId="signup-button"
           name="회원가입"
