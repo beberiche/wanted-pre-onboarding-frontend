@@ -76,8 +76,6 @@ const index = () => {
         password: password.currValue,
       })) as Response;
 
-      console.log(response);
-
       localStorage.setItem('Authorization', response.data.access_token);
       alert('로그인에 성공했습니다.');
       navigate('/todo');

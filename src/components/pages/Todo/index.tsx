@@ -1,6 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 // library
-import { useEffect, useRef, MutableRefObject, MouseEvent } from 'react';
+import {
+  useState,
+  useEffect,
+  useRef,
+  MutableRefObject,
+  MouseEvent,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // component
@@ -9,7 +14,7 @@ import Button from 'components/common/Button';
 
 // api
 
-import { createTodo } from 'api/todo';
+import { createTodo, getTodos } from 'api/todo';
 
 type Props = {
   id: number;
@@ -25,7 +30,7 @@ const TodoLi = ({ id, todo, isCompleted, isEdit }: Props) => {
       {isEdit ? (
         <Input type="text" initValue={todo} dataTestId="modify-input" />
       ) : (
-        <span>{todo}</span>
+        <span style={{ display: 'inline-block', width: '7rem' }}>{todo}</span>
       )}
       <Button
         name={isEdit ? '제출' : '수정'}
@@ -41,21 +46,30 @@ const TodoLi = ({ id, todo, isCompleted, isEdit }: Props) => {
 
 const index = () => {
   const navigate = useNavigate();
-  // const [todoList, setTodoList] = useState([]);
+  const [todoList, setTodoList] = useState([]);
 
   const inputRef = useRef() as MutableRefObject<HTMLInputElement>;
+
+  const getTodosHandler = async () => {
+    const response = await getTodos();
+    setTodoList(response.data);
+  };
 
   useEffect(() => {
     if (!localStorage.getItem('Authorization')) {
       alert('로그인 이후 사용하실 수 있습니다.');
       navigate('/signin');
     }
+    (async () => getTodosHandler())();
   }, []);
 
   const createTodoHandler = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      const response = await createTodo(inputRef.current.value);
+      await createTodo(inputRef.current.value);
+
+      const response = await getTodos();
+      setTodoList(response.data);
     } catch (error) {
       const message = '할 일을 생성하는데 실패했습니다.';
       alert(message);
@@ -72,14 +86,14 @@ const index = () => {
         <Button name="생성" onClick={createTodoHandler} />
       </form>
       <ul>
-        {/* {todoList.map(({ id, todo, isCompleted }) => (
+        {todoList.map(({ id, todo, isCompleted }) => (
           <TodoLi
             id={id}
             todo={todo}
             isCompleted={isCompleted}
             isEdit={false}
           />
-        ))} */}
+        ))}
       </ul>
     </>
   );

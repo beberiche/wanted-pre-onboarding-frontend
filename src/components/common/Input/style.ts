@@ -12,7 +12,7 @@ const StyledInput = styled.input.attrs({
 })<Style>`
   color: ${({ character }) => changeColor(character)};
   border-color: ${({ character }) => changeColor(character)};
-  min-width: 15rem;
+  min-width: ${({ type }) => (type === 'text' ? '15rem' : '0em')};
   font-size: 1.2rem;
   padding: 0.5rem;
   outline: none;

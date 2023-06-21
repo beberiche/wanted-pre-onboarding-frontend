@@ -9,3 +9,9 @@ export const createTodo = async (todo: string) => {
 
   return response;
 };
+
+export const getTodos = async () => {
+  const response = await todosAxios.get('');
+
+  return response;
+};
