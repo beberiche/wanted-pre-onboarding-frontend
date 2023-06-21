@@ -28,7 +28,7 @@ const index = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem('authorization')) {
+    if (localStorage.getItem('Authorization')) {
       alert('로그인이 확인되었습니다. todo 페이지로 이동합니다.');
       navigate('/todo');
     }

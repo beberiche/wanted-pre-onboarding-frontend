@@ -28,7 +28,7 @@ const index = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem('authorization')) {
+    if (localStorage.getItem('Authorization')) {
       alert('로그인이 확인되었습니다. todo 페이지로 이동합니다.');
       navigate('/todo');
     }
@@ -65,7 +65,9 @@ const index = () => {
     e.preventDefault();
 
     type Response = {
-      access_token: string;
+      data: {
+        access_token: string;
+      };
     };
 
     try {
@@ -76,7 +78,7 @@ const index = () => {
 
       console.log(response);
 
-      localStorage.setItem('authorization', response.access_token);
+      localStorage.setItem('Authorization', response.data.access_token);
       alert('로그인에 성공했습니다.');
       navigate('/todo');
     } catch (error) {
