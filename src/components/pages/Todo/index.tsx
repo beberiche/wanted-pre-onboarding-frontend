@@ -167,7 +167,7 @@ const index = () => {
       <form>
         <Input type="text" inputRef={inputRef} dataTestId="new-todo-input" />
         <Button
-          name="생성"
+          name="추가"
           onClick={createTodoHandler}
           dataTestId="new-todo-add-button"
         />
